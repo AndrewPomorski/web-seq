@@ -47,7 +47,7 @@ pub struct WebSeq {
 
 #[wasm_bindgen]
 impl WebSeq {
-    pub fn new(tempo: u8, time: u8, bars: u8, notes_per_bar: u8, step_index: u8, rows: u8) -> WebSeq {
+    pub fn new(tempo: u8, bars: u8, notes_per_bar: u8, rows: u8) -> WebSeq {
         
         let roll_note = RollNote::new(true, 100, 100);
         
@@ -63,7 +63,7 @@ impl WebSeq {
             bars: bars,
             notes_per_bar: notes_per_bar,
             roll: vec![row; usize::from(rows)],
-            step_index: step_index,
+            step_index: 0,
             rows,
         }
     }
@@ -88,6 +88,10 @@ impl WebSeq {
 
     pub fn set_tempo(&mut self, tempo: u8) {
         self.tempo = tempo;
+    }
+
+    pub fn get_step_index(&self) -> u8 {
+        self.step_index
     }
 
     pub fn render(&self) -> String {
